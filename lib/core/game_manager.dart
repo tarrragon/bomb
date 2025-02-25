@@ -78,8 +78,9 @@ class GameManager with ChangeNotifier {
   // 更新已揭露格子數量
   void updateRevealedCount(int count) {
     _revealedCount = count;
-    // 檢查是否獲勝
-    if (_revealedCount == (_boardSize * _boardSize - _mineCount)) {
+    // 檢查是否獲勝（當已揭露格子數量 >= 非地雷格子總數時）
+    if (_gameState == GameState.playing &&
+        _revealedCount >= (_boardSize * _boardSize - _mineCount)) {
       _gameState = GameState.won;
     }
     notifyListeners();
