@@ -69,15 +69,17 @@ class GameManager with ChangeNotifier {
     }
   }
 
-  // 更新旗子數量
-  void updateFlaggedCount(int count) {
-    _flaggedCount = count;
+  /// 更新已插旗的格子數量
+  /// @param flagCount 目前場上插旗的總數
+  void updateFlaggedCount(int flagCount) {
+    _flaggedCount = flagCount;
     notifyListeners();
   }
 
-  // 更新已揭露格子數量
-  void updateRevealedCount(int count) {
-    _revealedCount = count;
+  /// 更新已揭露的格子數量
+  /// @param revealedCellCount 目前已揭露的格子總數
+  void updateRevealedCount(int revealedCellCount) {
+    _revealedCount = revealedCellCount;
     // 檢查是否獲勝（當已揭露格子數量 >= 非地雷格子總數時）
     if (_gameState == GameState.playing &&
         _revealedCount >= (_boardSize * _boardSize - _mineCount)) {
