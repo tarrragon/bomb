@@ -94,7 +94,25 @@ class GameManager with ChangeNotifier {
     notifyListeners();
   }
 
-  // 第一次點擊
+  /// 處理遊戲首次點擊的控制邏輯
+  /// 
+  /// 負責：
+  /// * 控制遊戲的初始啟動時機
+  /// * 確保遊戲只會在第一次點擊後開始
+  /// * 防止遊戲在準備完成前被執行
+  /// 
+  /// 設計考量：
+  /// * 避免在遊戲開始前就產生地雷，防止第一下就踩到地雷
+  /// * 作為遊戲狀態的轉換點：從 [GameState.initial] 到 [GameState.playing]
+  /// 
+  /// 功能流程：
+  /// 1. 檢查是否為首次點擊
+  /// 2. 設置首次點擊標記為 false
+  /// 3. 觸發遊戲開始
+  /// 
+  /// 使用時機：
+  /// * 當玩家第一次點擊遊戲格子時呼叫
+  /// * 在重置遊戲後的第一次點擊時呼叫
   void handleFirstClick() {
     if (_isFirstClick) {
       _isFirstClick = false;
